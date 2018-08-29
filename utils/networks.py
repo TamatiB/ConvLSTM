@@ -174,7 +174,7 @@ def class_net_fcn_2p_lstm(input_shape):
     #model = Model(input_img, output=[output])
     #model.compile(loss=categorical_crossentropy_3d_w(2, class_dim=-1), optimizer='adam')
 
-    x = TimeDistributed(Convolution2D(2, 3, 3, border_mode='same'))(x)
+    x = TimeDistributed(Convolution2D(2, 3, 3, border_mode='same',activation='relu'))(x)
     output = TimeDistributed(Convolution2D(1, 1, 1, border_mode='same', activation='sigmoid'), name='output')(x)
     model = Model(input_img, output=[output])
     model.compile(loss='binary_crossentropy', optimizer = 'adadelta', metrics = ['accuracy'])

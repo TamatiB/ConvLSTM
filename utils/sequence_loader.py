@@ -136,6 +136,7 @@ class SequenceLoader:
         # Crop or center the data
         if crop:
             _data = _data[y0:y0 + height, x0:x0 + width]
+            print("We got here")
         else:
             dx = int(_data.shape[1] / 2.0 - (x0 + width / 2.0))
             dy = int(_data.shape[0] / 2.0 - (y0 + height / 2.0))
@@ -170,17 +171,19 @@ class SequenceLoader:
     def _add_frame(self, i, frame):
         frame = self._process_roi(frame)
         #print(frame.size)
-        self.frames[i] = self._resize(frame)
-        #self.frames[i] = frame
+        #self.frames[i] = self._resize(frame)
+        self.frames[i] = frame
 
     def _add_labels(self, i, cls):
-        _cls = self._process_roi(cls, crop=False, mask=False, label=True)
+        _cls = self._process_roi(cls, crop=True, mask=False, label=True) #I think this does nothing
         #_cls = self._process_roi(cls, crop=True, mask=True, label=True)
-        _cls = self._resize(_cls, interpolation='nearest')
+        #print(_cls.shape)
+        #_cls = self._resize(_cls, interpolation='nearest') # this does nothing
+        #print(_cls.shape)
         #_cls = _cls
-        self.labels_tag[256] = _cls.shape[1]
+        self.labels_tag[256] = _cls.shape[1] #this is supposed to assign a new shape but no change in shape occured
         self.labels_tag[257] = _cls.shape[0]
-        self.labels[i] = _cls
+        self.labels[i] = _cls #apend label image onto array
 
     # def merge_labels(self, merged_labels):
     #     label_set = np.unique(merged_labels).tolist()

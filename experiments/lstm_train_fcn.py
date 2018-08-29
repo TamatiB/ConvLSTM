@@ -273,6 +273,7 @@ if __name__ == '__main__':
     input_dir + 'substack500_7fps_1.avi',
     input_dir + 'substack500_7fps_4.avi',
     input_dir + 'substack500_7fps_3.avi']
+    #sequences = [input_dir + '/substack500_7fps_0.avi']
     sequences_test = [input_dir + 'substack500_7fps_2.avi',
     input_dir + 'substack500_7fps_5.avi']
     print("Number of sequences in train set " + str(len(sequences)))
