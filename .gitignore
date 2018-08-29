@@ -1,6 +1,5 @@
 #ignore all data folders
-/Data
-/Databinary
+/Data*
 /neurofinder*
 /tmp
 

@@ -71,7 +71,7 @@ class SequenceGenerator():
         #self.ys1 = []
         for s in sequences:
             print(s)
-            X, y = load_data(s, start=0, step=1)
+            X, y = load_data(s, start=0, step=1, binary=True)
             self.Xs.append(X)
             self.ys.append(y)
             #self.ys1.append(y)
@@ -153,6 +153,7 @@ class SequenceGenerator():
                     y.append(seq_y)
                     #y1.append(seq_y1)
                 #X = np.array(X).astype('f') / 255
+                # dont need the 255 over here though
                 X = np.array(X).astype('f')
                 y = np.array(y)
                 #y1 = np.array(y1)

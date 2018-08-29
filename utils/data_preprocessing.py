@@ -80,7 +80,8 @@ def load_data(seq_file, with_labels=True, binary=False, start=0, step=2):
             y = to_categorical(y, 3)
             # y = np.transpose(y, (0, 3, 1, 2))
 
-    X = X.astype('f')
+    #you need this over 255 thing, looks shit without it
+    X = X.astype('f')/255
     #X = X.astype('f')
 
     if not with_labels:
