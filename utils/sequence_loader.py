@@ -3,6 +3,7 @@ import os
 from copy import deepcopy
 
 from PIL import Image
+import scipy
 import subprocess
 import tempfile
 import shutil
@@ -164,23 +165,24 @@ class SequenceLoader:
             return _data
         else:
             return data
-    # def _resize(self, data, interpolation='lanczos'):
-    #     data = cv2.resize(data, (256,256))
-    #     return data
+
+    def _resizer(self, data, dimso):
+        data = cv2.resize(data, dimso)
+        return data
 
     def _add_frame(self, i, frame):
-        frame = self._process_roi(frame)
-        #print(frame.size)
-        #self.frames[i] = self._resize(frame)
+        #frame = self._process_roi(frame)
+        #print("size before" + str(frame.shape) + "\n")
+        frame = self._resizer(frame,(108,96))
+        #print("size after" + str(frame.shape) + "\n")
         self.frames[i] = frame
 
     def _add_labels(self, i, cls):
-        _cls = self._process_roi(cls, crop=True, mask=False, label=True) #I think this does nothing
-        #_cls = self._process_roi(cls, crop=True, mask=True, label=True)
-        #print(_cls.shape)
-        #_cls = self._resize(_cls, interpolation='nearest') # this does nothing
-        #print(_cls.shape)
-        #_cls = _cls
+        #_cls = self._process_roi(cls, crop=True, mask=False, label=True) #I think this does nothing
+        #print("size before" + str(cls.shape) + "\n")
+        #print(type(cls))
+        _cls = scipy.misc.imresize(cls,(384,432))
+        #print("size after" + str(_cls.shape) + "\n")
         self.labels_tag[256] = _cls.shape[1] #this is supposed to assign a new shape but no change in shape occured
         self.labels_tag[257] = _cls.shape[0]
         self.labels[i] = _cls #apend label image onto array

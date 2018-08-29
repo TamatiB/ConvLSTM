@@ -69,12 +69,12 @@ def load_data(seq_file, with_labels=True, binary=False, start=0, step=2):
         else:
             print('unlabelled:', seq_file, i)
     X = np.array(X)
-    X = X[:, :96, :108] # this is where we only take a certain chunk of the frame! God dammit
+    #X = X[:, :96, :108] # this is where we only take a certain chunk of the frame! God dammit
 
     X = np.expand_dims(X, axis=-1)
     if len(y) > 0:
         y = np.array(y)
-        y = y[:, :4*96, :4*108] # here the factor 4 is required because of the zoom scaling of 0.25
+        #y = y[:, :4*96, :4*108] # here the factor 4 is required because of the zoom scaling of 0.25
         if binary:
             y[y>0] = 1
             y = np.expand_dims(y, axis=-1)
