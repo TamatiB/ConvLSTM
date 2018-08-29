@@ -159,15 +159,15 @@ def class_net_fcn_2p_lstm(input_shape):
 
     x = TimeDistributed(UpSampling2D((2, 2)))(c3)
     x = merge([c2, x], mode='concat')
-    x = TimeDistributed(Convolution2D(c, 3, 3, border_mode='same'))(x)
+    x = TimeDistributed(Convolution2D(c, 3, 3, border_mode='same',activation='relu'))(x)
 
     x = TimeDistributed(UpSampling2D((2, 2)))(x)
     x = merge([c1, x], mode='concat')
     #x = TimeDistributed(Convolution2D(c, 3, 3, border_mode='same'))(x)
 
-    x = TimeDistributed(Convolution2D(3, 3, 3, border_mode='same'))(x)
+    x = TimeDistributed(Convolution2D(3, 3, 3, border_mode='same',activation='relu'))(x)
     x = TimeDistributed(UpSampling2D((2, 2)))(x)
-    x = TimeDistributed(Convolution2D(3, 3, 3, border_mode='same'))(x)
+    x = TimeDistributed(Convolution2D(3, 3, 3, border_mode='same',activation='relu'))(x)
     x = TimeDistributed(UpSampling2D((2, 2)))(x)
 
     #output = TimeDistributed(Convolution2D(3, 3, 3, border_mode='same', activation=softmax_2d(-1)), name='output')(x)

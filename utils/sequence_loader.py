@@ -174,7 +174,7 @@ class SequenceLoader:
         #self.frames[i] = frame
 
     def _add_labels(self, i, cls):
-        _cls = self._process_roi(cls, crop=True, mask=False, label=True)
+        _cls = self._process_roi(cls, crop=False, mask=False, label=True)
         #_cls = self._process_roi(cls, crop=True, mask=True, label=True)
         _cls = self._resize(_cls, interpolation='nearest')
         #_cls = _cls

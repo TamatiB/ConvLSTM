@@ -264,17 +264,17 @@ def train_model(network, sequences, sequences_test, nb_epochs=10, seq_length=100
 if __name__ == '__main__':
     # Load data split
 
-    input_dir = os.path.expanduser('~/Documents/ConvLSTM/Data/')
+    input_dir = os.path.expanduser('~/Documents/ConvLSTM/Databinary/')
     print("Fetching data from " + input_dir)
     #split = load_splits(os.path.expanduser('~/Documents/ConvLSTM/Data/split.txt'))[0]
     #sequences = [os.path.join(input_dir, f) for f in split['train']]
     #sequences_test = [os.path.join(input_dir, f) for f in split['test']]
-    sequences = ['/home/pelonomi/Documents/ConvLSTM/Data/substack500_7fps_0.avi',
-    '/home/pelonomi/Documents/ConvLSTM/Data/substack500_7fps_1.avi',
-    '/home/pelonomi/Documents/ConvLSTM/Data/substack500_7fps_4.avi',
-    '/home/pelonomi/Documents/ConvLSTM/Data/substack500_7fps_3.avi']
-    sequences_test = ['/home/pelonomi/Documents/ConvLSTM/Data/substack500_7fps_2.avi',
-    '/home/pelonomi/Documents/ConvLSTM/Data/substack500_7fps_5.avi']
+    sequences = [input_dir + '/substack500_7fps_0.avi',
+    input_dir + 'substack500_7fps_1.avi',
+    input_dir + 'substack500_7fps_4.avi',
+    input_dir + 'substack500_7fps_3.avi']
+    sequences_test = [input_dir + 'substack500_7fps_2.avi',
+    input_dir + 'substack500_7fps_5.avi']
     print("Number of sequences in train set " + str(len(sequences)))
     print("NUmber of sequences in test set " + str(len(sequences_test)))
 
