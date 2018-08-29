@@ -1,0 +1,10 @@
+#ignore all data folders
+/Data
+/Databinary
+/neurofinder*
+/tmp
+
+# ignore jupyter notebook checkpoints
+.ipynb*
+
+__pycache__
