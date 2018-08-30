@@ -153,8 +153,8 @@ class SequenceGenerator():
 
 
 
-                print("\n X: ",X.shape)
-                print("\n Y: ",y.shape)
+                #print("\n X: ",X.shape)
+                #print("\n Y: ",y.shape)
                 #print("\n Y1: ",y1.shape)
 
                 yield ({'input': X}, {'output': y})

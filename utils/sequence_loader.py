@@ -173,7 +173,10 @@ class SequenceLoader:
     def _add_frame(self, i, frame):
         #frame = self._process_roi(frame)
         #print("size before" + str(frame.shape) + "\n")
-        frame = self._resizer(frame,(108,96))
+        #frame = self._resizer(frame,(108,96))
+        frame = self._resizer(frame,(216,192))
+
+
         # if i==1:
         #     for row in frame:
         #         print("Frame row")
@@ -187,6 +190,7 @@ class SequenceLoader:
         #print("size before" + str(cls.shape) + "\n")
         #print(type(cls))
         _cls = scipy.misc.imresize(cls,(384,432))
+        #_cls = scipy.misc.imresize(cls,(96,108))
         #print("size after" + str(_cls.shape) + "\n")
         self.labels_tag[256] = _cls.shape[1] #this is supposed to assign a new shape but no change in shape occured
         self.labels_tag[257] = _cls.shape[0]
