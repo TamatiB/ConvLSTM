@@ -174,6 +174,11 @@ class SequenceLoader:
         #frame = self._process_roi(frame)
         #print("size before" + str(frame.shape) + "\n")
         frame = self._resizer(frame,(108,96))
+        # if i==1:
+        #     for row in frame:
+        #         print("Frame row")
+        #         print(max(row))
+
         #print("size after" + str(frame.shape) + "\n")
         self.frames[i] = frame
 

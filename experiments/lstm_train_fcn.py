@@ -63,7 +63,7 @@ def seq_augment(seq_X, seq_y):
 class SequenceGenerator():
 #class SequenceGenerator(keras.utils.Sequence):
 
-    def __init__(self, sequences, seq_length, seq_per_seq=50, shuffle=True, step=5, jitter=None, augment=None):
+    def __init__(self, sequences, seq_length, seq_per_seq=10, shuffle=True, step=5, jitter=None, augment=None):
         self.seq_length = seq_length
         self.step = step
         self.Xs = []
@@ -72,15 +72,20 @@ class SequenceGenerator():
         for s in sequences:
             print(s)
             X, y = load_data(s, start=0, step=1, binary=True)
+            print(X.shape)
             self.Xs.append(X)
             self.ys.append(y)
             #self.ys1.append(y)
+        print(len(self.Xs))
         self.nb_elements = seq_per_seq * len(sequences)
         self.shuffle = shuffle
         self.jitter = jitter
         self.augment = augment
         print("Number of elements: \n")
         print(self.nb_elements)
+        print("Sequence length" + str(self.seq_length) + "\n")
+        print("Sequence per sequence" + str(seq_per_seq)+ "\n")
+
 
     # def generate_batch(self, batch_size):
     #     for ib in range(self.nb_elements // batch_size):
@@ -121,24 +126,35 @@ class SequenceGenerator():
     #         yield ({'input': X}, {'ys1': y1})
 
     def generate_batch(self, batch_size):
+        #count = 0
         while True:
+            #print("\n Batch number: ")
+            #print(count)
+            #count+= 1
+
             for ib in range(self.nb_elements // batch_size):
-                X = []
-                y = []
+                #seq_per_seq * len sequences //batch_size
+                Xar = []
+                yar = []
                 #y1 = []
+
                 for j in range(batch_size):
                     if self.shuffle:
-                        i = np.random.randint(0, len(self.Xs))
+                        iter = np.random.randint(0, len(self.Xs))
                     else:
-                        i = 0
-                    seq_X = self.Xs[i]
-                    seq_y = self.ys[i]
+                        iter = 0
+                    #print("\n Data number")
+                    print(iter)
+                    seq_X = self.Xs[iter]
+                    print(seq_X.shape)
+                    seq_y = self.ys[iter]
                     #seq_y1 = self.ys1[i]
                     if self.shuffle:
+                        # select random frame range in dataset iter
                         s = np.random.randint(0, len(seq_X) - self.seq_length * self.step)
                     else:
                         s = ib
-                    indices = np.arange(s, s + self.seq_length * self.step, self.step)
+                    indices = np.arange(s, s + self.seq_length * self.step, self.step) #returns evenly spaced array (skipping frames according to step)
                     if self.jitter is not None:
                         # Perturb indices by introducing random time jitter
                         indices += np.random.randint(-self.jitter, self.jitter + 1, indices.shape)
@@ -149,19 +165,28 @@ class SequenceGenerator():
                     #seq_y1 = seq_y1[indices]
                     if self.augment:
                         seq_X, seq_X = seq_augment(seq_X, seq_X)
-                    X.append(seq_X)
-                    y.append(seq_y)
+                    #print("\n seq in inner for loop")
+                    #print(seq_X.shape)
+                    #print("array apended")
+                    Xar.append(seq_X)
+                    yar.append(seq_y)
+                    #print("\n Length x: " + str(len(Xar)))
+                #count += 1
                     #y1.append(seq_y1)
+                #print("\n count of ib, so nb/batches ")
+                #print(count)
+                #print("\n X after inner for loop")
+                #print(len(X))
+                #print(type(X))
                 #X = np.array(X).astype('f') / 255
                 # dont need the 255 over here though
-                X = np.array(X).astype('f')
-                y = np.array(y)
-                #y1 = np.array(y1)
+                #print("\n Length x: " + str(len(Xar)))
+                X = np.array(Xar).astype('f') #convert to float
+                y = np.array(yar)
                 #print("\n X: ",X.shape)
                 #print("\n Y: ",y.shape)
                 #print("\n Y1: ",y1.shape)
 
-                #yield Batch({'input': X}, {'ys1': y1})
                 yield ({'input': X}, {'output': y})
 
 
@@ -205,19 +230,19 @@ def generate_results(net, generator, output_dir, out_prefix):
         plt.close()
 
 
-def train_model(network, sequences, sequences_test, nb_epochs=10, seq_length=100, seq_step=5, seq_per_seq=10,
+def train_model(network, sequences, sequences_test, nb_epochs=10, seq_length=10, seq_step=1, seq_per_seq=5,
                 output_dir=None, file_suffix='', jitter=None, augment=None):
 
     if not os.path.isdir(output_dir):
         os.makedirs(output_dir)
 
     # Setup data generators
-    train = SequenceGenerator(sequences, seq_length, seq_per_seq=seq_per_seq, step=seq_step, jitter=jitter, augment=augment)
+    train = SequenceGenerator(sequences, seq_length, seq_per_seq=seq_per_seq, step=seq_step,jitter=None, augment=augment)
     #val = SequenceGenerator(sequences_test, seq_length, seq_per_seq=seq_per_seq, step=seq_step)
     input_shape = [None, ] + list(train.Xs[0].shape[1:])
     print("The input shape for the model is : " + str(input_shape))
     # batch size should be a number your data is divisible by
-    a = train.generate_batch(2)
+    a = train.generate_batch(1)
     #v = val.generate_batch(2)
     #print(type(a))
     #for i in a:
@@ -231,7 +256,7 @@ def train_model(network, sequences, sequences_test, nb_epochs=10, seq_length=100
 
     #model.fit(train, nb_epochs=nb_epochs, batch_size=1, val_data_generator=val)
     #model.fit_generator(a, epochs=nb_epochs, steps_per_epoch=1, validation_data=val)
-    model.fit_generator(a, epochs=nb_epochs, steps_per_epoch=20, verbose=1 )
+    model.fit_generator(a, epochs=nb_epochs, steps_per_epoch=16, verbose=1 )
     #model.fit_generator(generator = train, validation_data=val, use_multiprocessing=True, workers=6)
     #print((sequences_test[0]).shape())
     #res = model.predict(load_data(sequences_test[0]))
@@ -280,4 +305,4 @@ if __name__ == '__main__':
     print("NUmber of sequences in test set " + str(len(sequences_test)))
 
     network = class_net_fcn_2p_lstm  # input_shape = (None, 96, 108, 1)
-    train_model(network, sequences, sequences_test, seq_length=10, seq_step=5, output_dir='tmp')
+    train_model(network, sequences, sequences_test, output_dir='tmp')

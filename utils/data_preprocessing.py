@@ -73,17 +73,27 @@ def load_data(seq_file, with_labels=True, binary=False, start=0, step=2):
 
     X = np.expand_dims(X, axis=-1)
     if len(y) > 0:
+        #y = np.array(y)/255 #the image is binary of 255 and 0 this makes it 0 and 1 ie normalises it
         y = np.array(y)
         #y = y[:, :4*96, :4*108] # here the factor 4 is required because of the zoom scaling of 0.25
         if binary:
-            y[y>0] = 1
+            #y[y>0] = 1 #even though its binary some values are not 0 or 1 this corrects that
+            y[y<255] = 0
+            #for row in y[0]:
+                #print(row)
+            y = y/255
             y = np.expand_dims(y, axis=-1)
+
+
         else:
             y = to_categorical(y, 3)
             # y = np.transpose(y, (0, 3, 1, 2))
 
     #you need this over 255 thing, looks shit without it
-    X = X.astype('f')/255
+    X = X.astype('f')/255 #normalising
+    # for row in X[0]:
+    #     print(type(X))
+    #     print(row)
     #X = X.astype('f')
 
     if not with_labels:
