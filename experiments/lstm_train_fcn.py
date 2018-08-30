@@ -132,7 +132,8 @@ class SequenceGenerator():
                     Xar.append(seq_X)
                     #print(seq_y.shape)
 
-                    seq_y = np.expand_dims(seq_y[0], axis = 0)
+                    #This was supposed to help me make it many to 1
+                    #seq_y = np.expand_dims(seq_y[0], axis = 0)
                     yar.append(seq_y)
                     #print(yar)
                     #print("\n Length x: " + str(len(Xar)))
