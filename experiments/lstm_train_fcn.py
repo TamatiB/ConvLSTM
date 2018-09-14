@@ -150,6 +150,7 @@ class SequenceGenerator():
                 #print(yar)
                 X = np.array(Xar).astype('f') #convert to float
                 y = np.array(yar)
+                #print(yar)
 
 
 
@@ -258,17 +259,22 @@ def train_model(network, sequences, sequences_test, nb_epochs=10, seq_step=2, se
 if __name__ == '__main__':
     # Load data split
 
-    input_dir = os.path.expanduser('~/Documents/ConvLSTM/Databinary/')
+    input_dir = os.path.expanduser('~/Documents/ConvLSTM/Data/')
     print("Fetching data from " + input_dir)
     #split = load_splits(os.path.expanduser('~/Documents/ConvLSTM/Data/split.txt'))[0]
     #sequences = [os.path.join(input_dir, f) for f in split['train']]
     #sequences_test = [os.path.join(input_dir, f) for f in split['test']]
-    sequences = [input_dir + '/substack500_7fps_0.avi',
-    input_dir + 'substack500_7fps_1.avi',
+    sequences = [input_dir + '/substack500_7fps_2.avi',
+    input_dir + 'substack500_7fps_3.avi',
     input_dir + 'substack500_7fps_4.avi',
-    input_dir + 'substack500_7fps_3.avi']
+    input_dir + 'substack500_7fps_5.avi',
+    input_dir + 'substack500_7fps_6.avi',
+    input_dir + 'substack500_7fps_7.avi',
+    input_dir + 'substack500_7fps_8.avi',
+    input_dir + 'substack500_7fps_9.avi',
+    input_dir + 'substack500_7fps_10.avi']
     #sequences = [input_dir + '/substack500_7fps_0.avi']
-    sequences_test = [input_dir + 'substack500_7fps_2.avi', input_dir + 'substack500_7fps_5.avi']
+    sequences_test = [input_dir + 'substack500_7fps_0.avi', input_dir + 'substack500_7fps_1.avi']
     print("Number of sequences in train set " + str(len(sequences)))
     print("NUmber of sequences in test set " + str(len(sequences_test)))
 
