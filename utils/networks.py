@@ -11,6 +11,7 @@ from keras.optimizers import Adam
 def class_net_fcn_2p_lstm(input_shape):
     #This is not a sequential model because sequential models are specifically for
     # linear sequences
+    #recurrent_activation='hard_sigmoid'
     c = 12
     input_img = Input(input_shape, name='input')
 

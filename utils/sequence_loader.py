@@ -40,11 +40,11 @@ class SequenceLoader:
         # Find matching label file
         label_file = None
         for f in os.listdir(input_dir):
-            print(f + "\n")
+            #print(f + "\n")
 
             #print("Input Directory:    " + input_dir + "\n")
 
-            print( self.input_name + '' + '.label.tif')
+            #print( self.input_name + '' + '.label.tif')
             #print(f)
             if fnmatch.fnmatch(f, self.input_name + '' + '.label.tif'):
                 label_file = f
