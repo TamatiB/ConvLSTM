@@ -1,8 +1,14 @@
 #ignore all data folders
 /Data*
 /data
+/dummies
+
 /neurofinder*
 /tmp
+
+#ignore data files
+*.h5
+*.npy
 
 # ignore jupyter notebook checkpoints
 .ipynb*
