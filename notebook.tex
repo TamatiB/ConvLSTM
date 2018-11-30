@@ -1,0 +1,1354 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Stateful Neurofinder}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{keras}
+        \PY{k+kn}{import} \PY{n+nn}{cv2}
+        \PY{k+kn}{import} \PY{n+nn}{h5py}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{frame\PYZus{}no} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{n}{cap} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{VideoCapture}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neurofinder\PYZus{}data/01.00.label.tif}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{}video\PYZus{}name is the video being called}
+        \PY{n}{cap}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{frame\PYZus{}no}\PY{p}{)}\PY{p}{;} \PY{c+c1}{\PYZsh{} Where frame\PYZus{}no is the frame you want}
+        \PY{n}{ret}\PY{p}{,} \PY{n}{frame} \PY{o}{=} \PY{n}{cap}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} Read the frame}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{frame}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{frame}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{cap} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{VideoCapture}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neurofinder\PYZus{}data/01.00.avi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{}video\PYZus{}name is the video being called}
+        \PY{n}{cap}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{frame\PYZus{}no}\PY{p}{)}\PY{p}{;} \PY{c+c1}{\PYZsh{} Where frame\PYZus{}no is the frame you want}
+        \PY{n}{ret}\PY{p}{,} \PY{n}{frame} \PY{o}{=} \PY{n}{cap}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} Read the frame}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{frame}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{frame}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{frame}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{frame}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    The input images thus need to be normalised because values are not
+within the range of 0 and 1. This will hopefully help the network to
+optimise better
+
+    DEFINE MODEL AND TRAINING PROCEDURE
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{import} \PY{n}{plot\PYZus{}model}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{p}{(}\PY{n}{ConvLSTM2D}\PY{p}{,} \PY{n}{BatchNormalization}\PY{p}{,} \PY{n}{Convolution3D}\PY{p}{,} \PY{n}{Convolution2D}\PY{p}{,}\PY{n}{Conv2D}\PY{p}{,}
+                                  \PY{n}{TimeDistributed}\PY{p}{,} \PY{n}{MaxPooling2D}\PY{p}{,} \PY{n}{UpSampling2D}\PY{p}{,} \PY{n}{Input}\PY{p}{,} \PY{n}{merge}\PY{p}{,} \PY{n}{Cropping2D}\PY{p}{,} \PY{n}{concatenate}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}unet model}
+        \PY{k}{def} \PY{n+nf}{tsu\PYZus{}net}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{true\PYZus{}frag\PYZus{}len}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}This is not a sequential model because sequential models are specifically for}
+            \PY{c+c1}{\PYZsh{} linear sequences}
+            \PY{c+c1}{\PYZsh{}recurrent\PYZus{}activation=\PYZsq{}hard\PYZus{}sigmoid\PYZsq{}}
+            \PY{n}{c} \PY{o}{=} \PY{l+m+mi}{12}
+            \PY{n}{input\PYZus{}shape} \PY{o}{=} \PY{p}{(}\PY{k+kc}{None}\PY{p}{,} \PY{l+m+mi}{256}\PY{p}{,} \PY{l+m+mi}{256}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        
+            \PY{n+nb}{input} \PY{o}{=} \PY{n}{Input}\PY{p}{(}\PY{n}{batch\PYZus{}shape}\PY{o}{=} \PY{p}{[}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{true\PYZus{}frag\PYZus{}len}\PY{p}{,} \PY{l+m+mi}{256}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} 256,256}
+            \PY{n}{x} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} 
+                                       \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} 
+                                       \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                       \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n+nb}{input}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} 
+                                       \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} 
+                                       \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                       \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{c1} \PY{o}{=} \PY{n}{ConvLSTM2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}
+                               \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{n}{input\PYZus{}shape}\PY{p}{,}
+                               \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{return\PYZus{}sequences}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                               \PY{n}{stateful} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{MaxPooling2D}\PY{p}{(}\PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{c1}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}128,128}
+            \PY{n}{x} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} 
+                                       \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} 
+                                       \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                       \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} 
+                                       \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} 
+                                       \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                       \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{c2} \PY{o}{=} \PY{n}{ConvLSTM2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} 
+                            \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                            \PY{n}{return\PYZus{}sequences}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                            \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tanh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            
+            \PY{n}{x} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{MaxPooling2D}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{c2}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} 
+                                       \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} 
+                                       \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                       \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} 
+                                       \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} 
+                                       \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                       \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)} 
+            \PY{n}{c3} \PY{o}{=} \PY{n}{ConvLSTM2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}
+                               \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{n}{input\PYZus{}shape}\PY{p}{,}
+                               \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{return\PYZus{}sequences}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                               \PY{n}{stateful} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} pool: 24 27 24}
+            \PY{n}{x} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{MaxPooling2D}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{c3}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} 
+                                       \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} 
+                                       \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                       \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} 
+                                       \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} 
+                                       \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                       \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{c4} \PY{o}{=} \PY{n}{ConvLSTM2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}
+                               \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{n}{input\PYZus{}shape}\PY{p}{,}
+                               \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{return\PYZus{}sequences}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                               \PY{n}{stateful} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} upsl: 48 54 24}
+            \PY{n}{upsl\PYZus{}1} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{UpSampling2D}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{c4}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}x = TimeDistributed(Conv2D(filters=c, kernel\PYZus{}size=(2,2), padding=\PYZsq{}same\PYZsq{},activation=\PYZsq{}relu\PYZsq{}))(x)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{merge}\PY{p}{(}\PY{p}{[}\PY{n}{c3}\PY{p}{,} \PY{n}{upsl\PYZus{}1}\PY{p}{]}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{concat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{n}{c}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{n}{c}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} upsl: 96 108 24}
+            \PY{n}{upsl\PYZus{}2} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{UpSampling2D}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}x = TimeDistributed(Conv2D(filters=c, kernel\PYZus{}size=(2,2), padding=\PYZsq{}same\PYZsq{},activation=\PYZsq{}relu\PYZsq{}))(x)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{merge}\PY{p}{(}\PY{p}{[}\PY{n}{c2}\PY{p}{,} \PY{n}{upsl\PYZus{}2}\PY{p}{]}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{concat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} upsl: 192 216 24}
+            \PY{n}{upsl\PYZus{}3} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{UpSampling2D}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}x = TimeDistributed(Conv2D(filters=c, kernel\PYZus{}size=(2,2), padding=\PYZsq{}same\PYZsq{},activation=\PYZsq{}relu\PYZsq{}))(x)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{merge}\PY{p}{(}\PY{p}{[}\PY{n}{c1}\PY{p}{,} \PY{n}{upsl\PYZus{}3}\PY{p}{]}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{concat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}x = TimeDistributed(Conv2D(filters=3, kernel\PYZus{}size=(3,3), padding=\PYZsq{}same\PYZsq{},activation=\PYZsq{}relu\PYZsq{}))(x)}
+        
+        
+            \PY{c+c1}{\PYZsh{} upsl: 384 432}
+            \PY{c+c1}{\PYZsh{}upsl\PYZus{}4 = TimeDistributed(UpSampling2D((2, 2)))(x)}
+            \PY{c+c1}{\PYZsh{}x = TimeDistributed(Conv2D(filters=2, kernel\PYZus{}size=(3,3), padding=\PYZsq{}same\PYZsq{},activation=\PYZsq{}relu\PYZsq{}))(upsl\PYZus{}4)}
+            \PY{n}{output} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sigmoid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{model} \PY{o}{=} \PY{n}{Model}\PY{p}{(}\PY{n+nb}{input}\PY{p}{,} \PY{n}{output}\PY{o}{=}\PY{p}{[}\PY{n}{output}\PY{p}{]}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}model.compile(loss=\PYZsq{}binary\PYZus{}crossentropy\PYZsq{}, optimizer = \PYZsq{}adadelta\PYZsq{}, metrics = [\PYZsq{}binary\PYZus{}accuracy\PYZsq{}])}
+            \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{binary\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{optimizer} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{adadelta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+            \PY{n}{model}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+            \PY{k}{return} \PY{n}{model}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}simple mini batch model}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Model}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers}\PY{n+nn}{.}\PY{n+nn}{convolutional} \PY{k}{import} \PY{n}{Conv3D}\PY{p}{,} \PY{n}{Conv2D}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers}\PY{n+nn}{.}\PY{n+nn}{convolutional\PYZus{}recurrent} \PY{k}{import} \PY{n}{ConvLSTM2D}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers}\PY{n+nn}{.}\PY{n+nn}{normalization} \PY{k}{import} \PY{n}{BatchNormalization}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Input}\PY{p}{,} \PY{n}{TimeDistributed}
+        \PY{k+kn}{import} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{backend} \PY{k}{as} \PY{n+nn}{K}
+        \PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{optimizers} \PY{k}{import} \PY{o}{*}
+        
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{p}{(}\PY{n}{ConvLSTM2D}\PY{p}{,} \PY{n}{BatchNormalization}\PY{p}{,} \PY{n}{Convolution3D}\PY{p}{,} \PY{n}{Convolution2D}\PY{p}{,}\PY{n}{Conv2D}\PY{p}{,}
+                                  \PY{n}{TimeDistributed}\PY{p}{,} \PY{n}{MaxPooling2D}\PY{p}{,} \PY{n}{UpSampling2D}\PY{p}{,} \PY{n}{Input}\PY{p}{,} \PY{n}{merge}\PY{p}{,} \PY{n}{Cropping2D}\PY{p}{,} \PY{n}{concatenate}\PY{p}{)}
+        
+        
+        \PY{n}{K}\PY{o}{.}\PY{n}{tensorflow\PYZus{}backend}\PY{o}{.}\PY{n}{set\PYZus{}session}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{n}{config}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{ConfigProto}\PY{p}{(}\PY{n}{device\PYZus{}count} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GPU}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{smooth} \PY{o}{=} \PY{l+m+mf}{1.}
+        
+        \PY{k}{def} \PY{n+nf}{dice\PYZus{}coef}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{:}
+            \PY{n}{y\PYZus{}true\PYZus{}f} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{)}
+            \PY{n}{y\PYZus{}pred\PYZus{}f} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{n}{y\PYZus{}pred}\PY{p}{)}
+            \PY{n}{intersection} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{y\PYZus{}true\PYZus{}f} \PY{o}{*} \PY{n}{y\PYZus{}pred\PYZus{}f}\PY{p}{)}
+            \PY{k}{return} \PY{p}{(}\PY{l+m+mf}{2.} \PY{o}{*} \PY{n}{intersection} \PY{o}{+} \PY{n}{smooth}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{K}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{y\PYZus{}true\PYZus{}f}\PY{p}{)} \PY{o}{+} \PY{n}{K}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{y\PYZus{}pred\PYZus{}f}\PY{p}{)} \PY{o}{+} \PY{n}{smooth}\PY{p}{)}
+        
+        
+        \PY{k}{def} \PY{n+nf}{dice\PYZus{}coef\PYZus{}loss}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{o}{\PYZhy{}}\PY{n}{dice\PYZus{}coef}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}
+        
+        
+        
+        \PY{k}{def} \PY{n+nf}{load\PYZus{}model}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,}\PY{n}{true\PYZus{}frag\PYZus{}len}\PY{p}{)}\PY{p}{:}
+            \PY{n}{input\PYZus{}shape} \PY{o}{=} \PY{p}{(}\PY{k+kc}{None}\PY{p}{,} \PY{l+m+mi}{256}\PY{p}{,} \PY{l+m+mi}{256}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n+nb}{input} \PY{o}{=} \PY{n}{Input}\PY{p}{(}\PY{n}{batch\PYZus{}shape}\PY{o}{=} \PY{p}{[}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{true\PYZus{}frag\PYZus{}len}\PY{p}{,} \PY{l+m+mi}{256}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+            
+            \PY{n}{x} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n+nb}{input}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{MaxPooling2D}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{BatchNormalization}\PY{p}{(}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{ConvLSTM2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{14}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}
+                               \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{n}{input\PYZus{}shape}\PY{p}{,}
+                               \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{return\PYZus{}sequences}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                               \PY{n}{stateful} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{BatchNormalization}\PY{p}{(}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            
+            \PY{n}{upsl\PYZus{}1} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{UpSampling2D}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{output} \PY{o}{=} \PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sigmoid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{upsl\PYZus{}1}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} output = Conv3D(filters=1, kernel\PYZus{}size=(3, 3, 3),}
+            \PY{c+c1}{\PYZsh{}                    activation=\PYZsq{}sigmoid\PYZsq{},}
+            \PY{c+c1}{\PYZsh{}                    padding=\PYZsq{}same\PYZsq{}, data\PYZus{}format=\PYZsq{}channels\PYZus{}last\PYZsq{})(x)}
+        
+        
+            \PY{n}{model\PYZus{}stateful\PYZus{}batch} \PY{o}{=} \PY{n}{Model}\PY{p}{(}\PY{n}{inputs} \PY{o}{=} \PY{p}{[}\PY{n+nb}{input}\PY{p}{]}\PY{p}{,} \PY{n}{output}\PY{o}{=}\PY{p}{[}\PY{n}{output}\PY{p}{]}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}model\PYZus{}stateful\PYZus{}batch.compile(optimizer=Adam(lr=1e\PYZhy{}5), loss=dice\PYZus{}coef\PYZus{}loss, metrics=[dice\PYZus{}coef])}
+            \PY{n}{model\PYZus{}stateful\PYZus{}batch}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{binary\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{optimizer}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{adadelta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+            \PY{n}{model\PYZus{}stateful\PYZus{}batch}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+            \PY{k}{return} \PY{n}{model\PYZus{}stateful\PYZus{}batch}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{import} \PY{n+nn}{time}
+        \PY{k}{def} \PY{n+nf}{train\PYZus{}model}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{no\PYZus{}samples}\PY{p}{,} \PY{n}{no\PYZus{}frags}\PY{p}{,} \PY{n}{generator}\PY{p}{,}\PY{n}{valid\PYZus{}generator}\PY{p}{,}\PY{n}{epochs}\PY{p}{,} \PY{n}{frag\PYZus{}len}\PY{p}{,} \PY{n}{model\PYZus{}validator}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training for }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{epochs}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ epochs}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}training\PYZus{}losses = []}
+            \PY{n}{epoch\PYZus{}times} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{epoch} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{epochs}\PY{p}{)}\PY{p}{:}
+                \PY{n}{epoch\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of training reps per epoch }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{no\PYZus{}samples}\PY{p}{)}\PY{p}{)}
+                \PY{k}{for} \PY{n}{reps} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{reps\PYZus{}for\PYZus{}samples}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{reps}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{no\PYZus{}frags}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                       \PY{c+c1}{\PYZsh{}print (\PYZsq{}Time to reset states\PYZsq{})}
+                        \PY{n}{model}\PY{o}{.}\PY{n}{reset\PYZus{}states}\PY{p}{(}\PY{p}{)}
+                    \PY{n}{train\PYZus{}loss} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{n}{X}\PY{p}{,}\PY{n}{Y} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{generator}\PY{o}{.}\PY{n}{generate}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{train\PYZus{}loss} \PY{o}{+}\PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{train\PYZus{}on\PYZus{}batch}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{}print (\PYZsq{}\PYZsh{} Fragement \PYZsq{}, reps, \PYZsq{}  loss \PYZsq{}, train\PYZus{}loss)}
+                    \PY{c+c1}{\PYZsh{}training\PYZus{}losses.append(train\PYZus{}loss)}
+                   \PY{c+c1}{\PYZsh{} print(training\PYZus{}losses)}
+                    \PY{c+c1}{\PYZsh{}if reps\PYZpc{}no\PYZus{}frags == 0:}
+                    \PY{k}{if} \PY{n}{reps}\PY{o}{\PYZpc{}}\PY{k}{50} == 0:
+                        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{} Iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{reps}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{  loss }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{train\PYZus{}loss}\PY{p}{)}
+                        \PY{c+c1}{\PYZsh{}print(train\PYZus{}loss)}
+                \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{} Epoch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{epoch} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{  loss }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{train\PYZus{}loss}\PY{p}{)}
+                \PY{n}{model}\PY{o}{.}\PY{n}{reset\PYZus{}states}\PY{p}{(}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Done training}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Traing loss }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{train\PYZus{}loss}\PY{p}{)}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{}print(\PYZdq{}Validating\PYZdq{})}
+                \PY{n}{duration} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}\PY{o}{\PYZhy{}} \PY{n}{epoch\PYZus{}time}
+                \PY{n}{epoch\PYZus{}times}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{duration}\PY{p}{)}
+                
+            
+            \PY{k}{try}\PY{p}{:}
+                \PY{n}{model\PYZus{}validator}\PY{o}{.}\PY{n}{validate}\PY{p}{(}\PY{n}{model}\PY{p}{,}\PY{n}{no\PYZus{}frags}\PY{p}{,} \PY{n}{frag\PYZus{}len}\PY{p}{,} \PY{n}{valid\PYZus{}generator}\PY{p}{)}
+                \PY{k}{return} \PY{n}{model}\PY{p}{,} \PY{n}{epoch\PYZus{}times}
+            \PY{k}{except} \PY{n+ne}{IOError}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Validation could not be performed}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} we don\PYZsq{}t want to catch the IOError if it\PYZsq{}s raised}
+                \PY{k}{return} \PY{n}{model}\PY{p}{,} \PY{n}{epoch\PYZus{}times}
+                
+            
+            
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{measure}
+        \PY{k+kn}{from} \PY{n+nn}{regional} \PY{k}{import} \PY{n}{many}
+        \PY{k+kn}{from} \PY{n+nn}{neurofinder} \PY{k}{import} \PY{n}{centers}\PY{p}{,} \PY{n}{shapes}
+        \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{filters} \PY{k}{import} \PY{n}{threshold\PYZus{}yen}
+        \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{morphology} \PY{k}{import} \PY{n}{closing}\PY{p}{,} \PY{n}{square}
+        
+        \PY{k}{class} \PY{n+nc}{Validate\PYZus{}and\PYZus{}Metrics}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+            
+        
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{model}\PY{p}{,} \PY{n}{no\PYZus{}frags}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{precisions} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{recalls} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{f1scores} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{model} \PY{o}{=} \PY{n}{model}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{no\PYZus{}frags} \PY{o}{=} \PY{n}{no\PYZus{}frags}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dims} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{)}
+                
+            \PY{k}{def} \PY{n+nf}{validate}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{model}\PY{p}{,} \PY{n}{frag\PYZus{}len}\PY{p}{,} \PY{n}{valid\PYZus{}generator}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{frag\PYZus{}len} \PY{o}{=} \PY{n}{frag\PYZus{}len}
+                \PY{n}{ypred} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{batch\PYZus{}prediction}\PY{p}{(}\PY{n}{valid\PYZus{}generator}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} this frag len is not defined so we need a way to get it in here}
+                \PY{c+c1}{\PYZsh{} the true one needs to be normalised to be compared properly}
+                \PY{n}{ytrue} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ytrue\PYZus{}for\PYZus{}validation}\PY{p}{(}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{}we need the last result of all the fragments}
+                \PY{n}{ypred\PYZus{}ind} \PY{o}{=} \PY{n}{ypred}\PY{p}{[}\PY{n}{no\PYZus{}frags}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{frag\PYZus{}len}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dims}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{ypred\PYZus{}ind}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+                \PY{n}{thresh} \PY{o}{=} \PY{n}{threshold\PYZus{}isodata}\PY{p}{(}\PY{n}{ypred\PYZus{}ind}\PY{p}{)}
+                \PY{n}{ypred\PYZus{}thresh} \PY{o}{=} \PY{p}{(}\PY{n}{closing}\PY{p}{(}\PY{n}{ypred\PYZus{}ind} \PY{o}{\PYZgt{}} \PY{n}{thresh}\PY{p}{,} \PY{n}{square}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{255}
+        
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{ytrue}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{ytrue}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{ypred\PYZus{}thresh}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{ypred\PYZus{}thresh}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{}print(ytrue.reshape(256,400).shape)}
+                \PY{c+c1}{\PYZsh{}print(ypred.reshape(256,400).shape)}
+                \PY{n}{the\PYZus{}metric} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{nf\PYZus{}mask\PYZus{}metrics}\PY{p}{(}\PY{n}{ytrue}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dims}\PY{p}{)}\PY{p}{,}\PY{n}{ypred\PYZus{}thresh}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dims}\PY{p}{)}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{}print(the\PYZus{}metric)}
+                
+            \PY{k}{def} \PY{n+nf}{ytrue\PYZus{}for\PYZus{}validation}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{n}{vect} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{VideoCapture}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{neurofinder\PYZus{}data/04.01.label.tif}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{n}{vect}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+                \PY{n}{ret}\PY{p}{,}\PY{n}{lab\PYZus{}frame} \PY{o}{=} \PY{n}{vect}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+                \PY{n}{lab\PYZus{}frame} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{lab\PYZus{}frame}\PY{p}{,}\PY{p}{(} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dims}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dims}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                \PY{n}{lab\PYZus{}frame} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{cvtColor}\PY{p}{(}\PY{n}{lab\PYZus{}frame}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{COLOR\PYZus{}BGR2GRAY}\PY{p}{)}
+                \PY{k}{return} \PY{n}{lab\PYZus{}frame}
+            
+            \PY{k}{def} \PY{n+nf}{batch\PYZus{}prediction}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{generator}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} this just tests out one sample. I think it is necessary to reset states on prediction too}
+                \PY{n}{stateful\PYZus{}preds} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{model}\PY{o}{.}\PY{n}{reset\PYZus{}states}\PY{p}{(}\PY{p}{)}
+                \PY{n}{gen} \PY{o}{=} \PY{n}{generator}\PY{o}{.}\PY{n}{generate}\PY{p}{(}\PY{p}{)}
+                \PY{k}{for} \PY{n}{fragment} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{no\PYZus{}frags}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{X}\PY{p}{,}\PY{n}{Y} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{gen}\PY{p}{)}
+                    \PY{n}{stateful\PYZus{}batch} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{model}\PY{o}{.}\PY{n}{predict\PYZus{}on\PYZus{}batch}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+                    \PY{n}{stateful\PYZus{}preds}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{stateful\PYZus{}batch}\PY{p}{)}
+                \PY{k}{return} \PY{n}{stateful\PYZus{}preds}
+            
+            
+            \PY{k}{def} \PY{n+nf}{\PYZus{}mask\PYZus{}to\PYZus{}regional}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{m}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Convert a 2D numpy mask to a regional many object so it can be measured}
+        \PY{l+s+sd}{        using the neurofinder library.\PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{n}{mlbl} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{label}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{background}\PY{o}{=}\PY{l+m+mi}{255} \PY{p}{)}
+                \PY{n}{coords} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{k}{for} \PY{n}{lbl} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{mlbl}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{yy}\PY{p}{,} \PY{n}{xx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{mlbl} \PY{o}{==} \PY{n}{lbl}\PY{p}{)}
+                    \PY{n}{coords}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{y}\PY{p}{,} \PY{n}{x}\PY{p}{]} \PY{k}{for} \PY{n}{y}\PY{p}{,} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{yy}\PY{p}{,} \PY{n}{xx}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+               
+                \PY{k}{return} \PY{n}{many}\PY{p}{(}\PY{n}{coords}\PY{p}{)}
+            
+            \PY{k}{def} \PY{n+nf}{nf\PYZus{}mask\PYZus{}metrics}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{n}{mp}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Computes precision, recall, inclusion, exclusion, and combined (F1) score for the given mask (m) and predicted mask (mp). Note that this does assumes single 2D masks and does not aaccount for overlapping neurons.}
+        
+        \PY{l+s+sd}{        \PYZsh{} Arguments}
+        \PY{l+s+sd}{            m: ground\PYZhy{}truth (height x width) binary numpy mask.}
+        \PY{l+s+sd}{            mp: predicted (height x width) binary numpy mask.}
+        
+        \PY{l+s+sd}{        \PYZsh{} Returns}
+        \PY{l+s+sd}{            p,r,i,e,f1: precision, recall, inclusion, exclusion, and F1 scores.}
+        
+        \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{c+c1}{\PYZsh{} Return all zeros if the predicted mask is empty.}
+                \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{mp}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{k}{return} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}
+                
+                \PY{c+c1}{\PYZsh{}print(type(m))}
+                \PY{c+c1}{\PYZsh{}print(type(mp))}
+                \PY{c+c1}{\PYZsh{}print(m.shape)}
+                \PY{c+c1}{\PYZsh{}print(mp.shape)}
+                \PY{c+c1}{\PYZsh{} Convert masks to regional format and compute their metrics.}
+                \PY{n}{mreg} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}mask\PYZus{}to\PYZus{}regional}\PY{p}{(}\PY{n}{m}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{}print(type(mreg))}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{mreg}\PY{p}{)}
+                \PY{n}{mpreg} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}mask\PYZus{}to\PYZus{}regional}\PY{p}{(}\PY{n}{mp}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{}print(type(mpreg))}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{mpreg}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{}r, p = centers(mreg, mpreg,threshold = 5 )}
+                \PY{n}{r}\PY{p}{,} \PY{n}{p} \PY{o}{=} \PY{n}{centers}\PY{p}{(}\PY{n}{mreg}\PY{p}{,} \PY{n}{mpreg}\PY{p}{,}\PY{n}{threshold} \PY{o}{=} \PY{l+m+mi}{5} \PY{p}{)}
+        
+                \PY{n}{i}\PY{p}{,} \PY{n}{e} \PY{o}{=} \PY{n}{shapes}\PY{p}{(}\PY{n}{mreg}\PY{p}{,} \PY{n}{mpreg}\PY{p}{)}
+                \PY{n}{f1} \PY{o}{=} \PY{l+m+mf}{2.} \PY{o}{*} \PY{p}{(}\PY{n}{r} \PY{o}{*} \PY{n}{p}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{r} \PY{o}{+} \PY{n}{p}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{precisions}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{p}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{recalls}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{r}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{f1scores}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{f1}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{precisions}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{recalls}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{f1scores}\PY{p}{)}
+                \PY{k}{return} \PY{p}{(}\PY{n}{p}\PY{p}{,} \PY{n}{r}\PY{p}{,} \PY{n}{i}\PY{p}{,} \PY{n}{e}\PY{p}{,} \PY{n}{f1}\PY{p}{)}
+            
+            \PY{k}{def} \PY{n+nf}{get\PYZus{}metrics}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{p}{\PYZob{}}
+                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{precisions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{precisions}\PY{p}{,}
+                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{recalls}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{recalls}\PY{p}{,}
+                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f1scores}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{f1scores}
+                \PY{p}{\PYZcb{}}
+            
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{ey} \PY{o}{=} \PY{n}{measure}\PY{o}{.}\PY{n}{label}\PY{p}{(}\PY{n}{bw}\PY{p}{,} \PY{n}{background}\PY{o}{=}\PY{l+m+mi}{255}\PY{p}{)}
+        \PY{n}{ey}\PY{o}{.}\PY{n}{shape}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{ey}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{filters} \PY{k}{import} \PY{n}{threshold\PYZus{}yen}\PY{p}{,} \PY{n}{threshold\PYZus{}isodata}\PY{p}{,} \PY{n}{threshold\PYZus{}otsu}
+        \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{morphology} \PY{k}{import} \PY{n}{closing}\PY{p}{,} \PY{n}{square}
+        
+        \PY{n}{ypred\PYZus{}test} \PY{o}{=} \PY{n}{predicted}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}
+        \PY{n}{thresh} \PY{o}{=} \PY{n}{threshold\PYZus{}isodata}\PY{p}{(}\PY{n}{ypred\PYZus{}test}\PY{p}{)}
+        \PY{n}{bw} \PY{o}{=} \PY{p}{(}\PY{n}{closing}\PY{p}{(}\PY{n}{ypred\PYZus{}test} \PY{o}{\PYZgt{}} \PY{n}{thresh}\PY{p}{,} \PY{n}{square}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{255}
+        \PY{c+c1}{\PYZsh{}threshpredicted = (ypred\PYZus{}test\PYZgt{}thresh)*255}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{bw}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        
+        \PY{n}{ytrue\PYZus{}test} \PY{o}{=} \PY{n}{validator}\PY{o}{.}\PY{n}{ytrue\PYZus{}for\PYZus{}validation}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{bw}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{ytrue\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{n}{validator}\PY{o}{.}\PY{n}{nf\PYZus{}mask\PYZus{}metrics}\PY{p}{(}\PY{n}{ytrue\PYZus{}test}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{)}\PY{p}{,}\PY{n}{bw}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{bw}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Max value: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{bw}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{ytrue\PYZus{}test}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Max value: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{validator}\PY{o}{.}\PY{n}{get\PYZus{}metrics}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{stochastic}{%
+\subsection{STOCHASTIC}\label{stochastic}}
+
+\hypertarget{stateful-batch_shape-1-frag_len-x-y-1}{%
+\subsection{STATEFUL batch\_shape = {[}1, frag\_len, x, y,
+1{]}}\label{stateful-batch_shape-1-frag_len-x-y-1}}
+
+\begin{verbatim}
+1 sample at a time
+update made after no_fragments batches
+y = [1, 1, x, y, 1]
+\end{verbatim}
+
+    DEFINE DATA FEEDER
+
+    There are two ways to sample the data as illustrated below. Check it
+out. The only difference is how indexes are defined for data range of
+each fragment and then the no of resulting fragments.
+
+    no of fragments and length of fragments changes with the step size so
+the real length becomes (frag\_len+1)/steps and number of fragments is
+(data\_len-frag\_len + 1)/steps
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{example} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{17}\PY{p}{,}\PY{l+m+mi}{18}\PY{p}{,}\PY{l+m+mi}{19}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{21}\PY{p}{,} \PY{l+m+mi}{22}\PY{p}{]}
+        \PY{n}{data\PYZus{}len} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{example}\PY{p}{)}
+        \PY{n}{frag\PYZus{}len} \PY{o}{=} \PY{l+m+mi}{11}
+        \PY{n}{steps} \PY{o}{=} \PY{l+m+mi}{2}
+        \PY{n}{no\PYZus{}frags} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{p}{(}\PY{n}{data\PYZus{}len}\PY{o}{\PYZhy{}}\PY{n}{frag\PYZus{}len} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{n}{steps}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{no\PYZus{}frags}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{current\PYZus{}count} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{no\PYZus{}frags}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}ranger = list(range(current\PYZus{}count,current\PYZus{}count+ frag\PYZus{}len))}
+            \PY{n}{indx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{current\PYZus{}count}\PY{o}{*}\PY{n}{steps}\PY{p}{,}\PY{n}{current\PYZus{}count}\PY{o}{*}\PY{n}{steps}\PY{o}{+} \PY{n}{frag\PYZus{}len}\PY{p}{,} \PY{n}{steps}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{example}\PY{p}{)}\PY{p}{[}\PY{n}{indx}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{example}\PY{p}{)}\PY{p}{[}\PY{n}{indx}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+    no of fragments does not change with the step size but, the actual
+length of the fragment is changed by the step size. so the real length
+becomes (frag\_len+1)/steps
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{example} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{17}\PY{p}{,}\PY{l+m+mi}{18}\PY{p}{,}\PY{l+m+mi}{19}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{21}\PY{p}{,} \PY{l+m+mi}{22}\PY{p}{]}
+        \PY{n}{data\PYZus{}len} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{example}\PY{p}{)}
+        \PY{n}{frag\PYZus{}len} \PY{o}{=} \PY{l+m+mi}{11}
+        \PY{n}{steps} \PY{o}{=} \PY{l+m+mi}{2}
+        \PY{n}{no\PYZus{}frags} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{data\PYZus{}len}\PY{o}{\PYZhy{}}\PY{n}{frag\PYZus{}len} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{no\PYZus{}frags}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{current\PYZus{}count} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{no\PYZus{}frags}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}ranger = list(range(current\PYZus{}count,current\PYZus{}count+ frag\PYZus{}len))}
+            \PY{n}{indx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{current\PYZus{}count}\PY{p}{,}\PY{n}{current\PYZus{}count}\PY{o}{+} \PY{n}{frag\PYZus{}len}\PY{p}{,} \PY{n}{steps}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{example}\PY{p}{)}\PY{p}{[}\PY{n}{indx}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{example}\PY{p}{)}\PY{p}{[}\PY{n}{indx}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    Quick check to make sure the data is loaded correctly by the data
+generator. Also a quick check to make sure the images returned are
+nomalised (value range between 0 and 1).
+
+NB. Make sure current sample number of next output block is the same as
+the label vect that is read by cv2 when drawing otherwise images wont
+match and you might think it is not working
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{class} \PY{n+nc}{Batch\PYZus{}size\PYZus{}1\PYZus{}Generator}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+        
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{frag\PYZus{}len}\PY{p}{,} \PY{n}{steps} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{valid} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{frag\PYZus{}len} \PY{o}{=} \PY{n}{frag\PYZus{}len}
+                \PY{c+c1}{\PYZsh{}print(frag\PYZus{}len)}
+                \PY{c+c1}{\PYZsh{} this will track the progress of the batches sequentially through the}
+                \PY{c+c1}{\PYZsh{} data set \PYZhy{} once the data reaches the end of the data set it will reset}
+                \PY{c+c1}{\PYZsh{} back to zero}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}idx} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}count} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data} \PY{o}{=} \PY{k+kc}{None}
+                \PY{c+c1}{\PYZsh{} dimensions expected by the network}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dims} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{steps} \PY{o}{=} \PY{n}{steps}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{valid} \PY{o}{=} \PY{n}{valid}
+            
+                \PY{c+c1}{\PYZsh{}self.dup\PYZus{}rows()}
+                \PY{c+c1}{\PYZsh{} skip\PYZus{}step is the number of words which will be skipped before the next}
+                \PY{c+c1}{\PYZsh{} batch is skimmed from the data set}
+        
+            \PY{k}{def} \PY{n+nf}{dup\PYZus{}rows}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{indx}\PY{p}{,} \PY{n}{num\PYZus{}dups}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{p}{[}\PY{n}{indx}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{num\PYZus{}dups}\PY{p}{,}\PY{n}{a}\PY{p}{[}\PY{n}{indx}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+            
+            \PY{k}{def} \PY{n+nf}{\PYZus{}resizeNnormalize}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{dimso}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{        data : the image to be resized }
+        \PY{l+s+sd}{        dimso : the dimensions to be resized to (tuple)}
+        \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{n}{data} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{dimso}\PY{p}{)}
+                \PY{n}{img} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{cvtColor}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{COLOR\PYZus{}BGR2GRAY}\PY{p}{)}
+                \PY{n}{nomalized} \PY{o}{=} \PY{n}{img}\PY{o}{/}\PY{l+m+mi}{255}
+                \PY{k}{return} \PY{n}{nomalized}
+            
+            
+            \PY{k}{def} \PY{n+nf}{generate}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} this generator returns no\PYZus{}frag fragments for each sample before moving to the next sample}
+                \PY{n}{data\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{01.00}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{01.01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{02.00}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{02.01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{04.00}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{04.01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+                    \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{valid} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}idx} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{04.01}\PY{l+s+s1}{\PYZsq{}}
+                        \PY{c+c1}{\PYZsh{}if self.current\PYZus{}count == 0:}
+                            \PY{c+c1}{\PYZsh{}print(\PYZsq{}Validating\PYZsq{})}
+                    \PY{k}{elif} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}count} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}idx} \PY{o}{=} \PY{n}{data\PYZus{}array}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{]}
+                        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Current sample is : }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}idx}\PY{p}{)}
+                    \PY{n}{video} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{VideoCapture}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neurofinder\PYZus{}data/}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}idx} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.avi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+                    \PY{n}{data\PYZus{}len} \PY{o}{=} \PY{l+m+mi}{500}
+                    \PY{c+c1}{\PYZsh{} find out number of fragments for data}
+                    \PY{n}{no\PYZus{}frags} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{p}{(}\PY{n}{data\PYZus{}len}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{frag\PYZus{}len} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{steps}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{}no\PYZus{}frags = int(data\PYZus{}len/frag\PYZus{}len)}
+                    
+                    \PY{c+c1}{\PYZsh{}print(\PYZdq{}No frags inside \PYZdq{} + str(no\PYZus{}frags))}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}count} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                    \PY{c+c1}{\PYZsh{}print(\PYZsq{}current sample number: \PYZsq{} + str(self.current\PYZus{}idx)+\PYZsq{}, Fragment \PYZsq{} + str(self.current\PYZus{}count)+ \PYZsq{} of \PYZsq{} + str(no\PYZus{}frags))}
+                    
+                    \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}count} \PY{o}{==} \PY{n}{no\PYZus{}frags}\PY{p}{:}
+                        \PY{c+c1}{\PYZsh{}print(self.current\PYZus{}count)}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}count} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{n}{data\PYZus{}range} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}count}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}count}\PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{frag\PYZus{}len}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{}print(data\PYZus{}range)}
+                    
+                    \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+                    \PY{c+c1}{\PYZsh{} data\PYZus{}range is the range of frames to be fetched for each fragment}
+                    \PY{n}{indxs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}count}\PY{o}{*}\PY{n}{steps}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}count}\PY{o}{*}\PY{n}{steps}\PY{o}{+} \PY{n}{frag\PYZus{}len}\PY{p}{,} \PY{n}{steps}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{}indxs = np.arange(self.current\PYZus{}count*self.frag\PYZus{}len,(self.current\PYZus{}count+1)* self.frag\PYZus{}len, steps)}
+        
+                    \PY{c+c1}{\PYZsh{}for indexer in range(data\PYZus{}range[0],data\PYZus{}range[1]):}
+                    \PY{k}{for} \PY{n}{indexer} \PY{o+ow}{in} \PY{n}{indxs}\PY{p}{:}
+        
+                        \PY{n}{video}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{indexer}\PY{p}{)} \PY{c+c1}{\PYZsh{} Where frame\PYZus{}no is the frame you want}
+                        \PY{n}{ret}\PY{p}{,} \PY{n}{frame} \PY{o}{=} \PY{n}{video}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} Read the frame}
+                        \PY{n}{x}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}resizeNnormalize}\PY{p}{(}\PY{n}{frame}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dims}\PY{p}{)}\PY{p}{)}
+                 
+                    \PY{c+c1}{\PYZsh{}print(\PYZsq{}No frags \PYZsq{} + str(no\PYZus{}frags))}
+                    
+                     
+                    \PY{n}{labels} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{VideoCapture}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neurofinder\PYZus{}data/}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}idx} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.label.tif}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    \PY{n}{labels}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+                    \PY{n}{ret}\PY{p}{,}\PY{n}{lab\PYZus{}frame} \PY{o}{=} \PY{n}{labels}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+                    \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                    \PY{k}{for} \PY{n}{indx} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{}for indx in range(int((self.frag\PYZus{}len+1)/self.steps)\PYZhy{}1):}
+                        \PY{n}{y}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}resizeNnormalize}\PY{p}{(}\PY{n}{lab\PYZus{}frame}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dims}\PY{p}{)}\PY{p}{)}
+                        
+                    \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{expand\PYZus{}dims}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+                    \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{expand\PYZus{}dims}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+                    \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{expand\PYZus{}dims}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                    \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{expand\PYZus{}dims}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                   
+                    \PY{c+c1}{\PYZsh{}yield x,y}
+                    \PY{k}{yield} \PY{n}{x}\PY{p}{,}\PY{n}{y}
+                    
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Set params batch size 1}
+        \PY{n}{data\PYZus{}len} \PY{o}{=} \PY{l+m+mi}{500}
+        \PY{n}{steps} \PY{o}{=} \PY{l+m+mi}{2}
+        \PY{n}{frag\PYZus{}len} \PY{o}{=} \PY{l+m+mi}{40}
+        \PY{n}{true\PYZus{}frag\PYZus{}len} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{p}{(}\PY{n}{frag\PYZus{}len}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{n}{steps}\PY{p}{)}
+        \PY{n}{no\PYZus{}frags} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{p}{(}\PY{n}{data\PYZus{}len}\PY{o}{\PYZhy{}}\PY{n}{frag\PYZus{}len} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{n}{steps}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{no\PYZus{}frags}\PY{p}{)}
+        \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{n}{no\PYZus{}videos} \PY{o}{=} \PY{l+m+mi}{6}
+        \PY{n}{reps\PYZus{}for\PYZus{}samples} \PY{o}{=} \PY{n}{no\PYZus{}videos}\PY{o}{*}\PY{n}{no\PYZus{}frags}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{reps\PYZus{}for\PYZus{}samples}\PY{p}{)}
+        \PY{n}{epochs} \PY{o}{=} \PY{l+m+mi}{5}
+\end{Verbatim}
+
+
+    Check to see if Generator is loading data correctly
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{True fragment length }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{true\PYZus{}frag\PYZus{}len}\PY{p}{)}\PY{p}{)}
+        \PY{n}{gener\PYZus{}obj} \PY{o}{=} \PY{n}{Batch\PYZus{}size\PYZus{}1\PYZus{}Generator}\PY{p}{(}\PY{n}{frag\PYZus{}len}\PY{p}{,} \PY{n}{steps}\PY{p}{)}
+        \PY{n}{gener} \PY{o}{=} \PY{n}{gener\PYZus{}obj}\PY{o}{.}\PY{n}{generate}\PY{p}{(}\PY{p}{)}
+        \PY{n}{X}\PY{p}{,}\PY{n}{y} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{gener}\PY{p}{)}
+        \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{y}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{vect} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{VideoCapture}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{neurofinder\PYZus{}data/01.01.label.tif}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{vect}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{ret}\PY{p}{,}\PY{n}{lab\PYZus{}frame} \PY{o}{=} \PY{n}{vect}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+        \PY{n}{lab\PYZus{}frame} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{lab\PYZus{}frame}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{lab\PYZus{}frame}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Max value: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{lab\PYZus{}frame}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{)}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Max value: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{)}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Max value: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    TRAIN
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{model\PYZus{}stateful\PYZus{}batch1} \PY{o}{=} \PY{n}{load\PYZus{}model}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,}\PY{n}{true\PYZus{}frag\PYZus{}len}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{model\PYZus{}stateful\PYZus{}batch1} \PY{o}{=} \PY{n}{tsu\PYZus{}net}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,}\PY{n}{true\PYZus{}frag\PYZus{}len}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{gener} \PY{o}{=} \PY{n}{Batch\PYZus{}size\PYZus{}1\PYZus{}Generator}\PY{p}{(}\PY{n}{frag\PYZus{}len}\PY{p}{,} \PY{n}{steps}\PY{p}{)}
+        \PY{n}{valid\PYZus{}generator} \PY{o}{=} \PY{n}{Batch\PYZus{}size\PYZus{}1\PYZus{}Generator}\PY{p}{(}\PY{n}{frag\PYZus{}len}\PY{p}{,} \PY{n}{steps}\PY{p}{,} \PY{n}{valid} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{validator} \PY{o}{=} \PY{n}{Validate\PYZus{}and\PYZus{}Metrics}\PY{p}{(}\PY{n}{model\PYZus{}stateful\PYZus{}batch1}\PY{p}{,}\PY{n}{no\PYZus{}frags} \PY{p}{)}
+        \PY{n}{model\PYZus{}stateful\PYZus{}batch1\PYZus{}trained}\PY{p}{,} \PY{n}{epoch\PYZus{}execution\PYZus{}time} \PY{o}{=} \PY{n}{train\PYZus{}model}\PY{p}{(}\PY{n}{model\PYZus{}stateful\PYZus{}batch1}\PY{p}{,} \PY{n}{reps\PYZus{}for\PYZus{}samples}\PY{p}{,} \PY{n}{no\PYZus{}frags}\PY{p}{,} \PY{n}{gener}\PY{p}{,}\PY{n}{valid\PYZus{}generator}\PY{p}{,}\PY{n}{epochs}\PY{p}{,} \PY{n}{true\PYZus{}frag\PYZus{}len}\PY{p}{,} \PY{n}{validator}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{stocahstic\PYZus{}metrics} \PY{o}{=} \PY{n}{validator}\PY{o}{.}\PY{n}{get\PYZus{}metrics}\PY{p}{(}\PY{p}{)}
+        \PY{n}{stocahstic\PYZus{}metrics}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{stochastic\PYZus{}execution\PYZus{}time} \PY{o}{=} \PY{n}{epoch\PYZus{}execution\PYZus{}time}
+        \PY{n}{stochastic\PYZus{}execution\PYZus{}time}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{save\PYZus{}model}\PY{p}{(}\PY{n}{model\PYZus{}stateful\PYZus{}batch1\PYZus{}trained}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stochastic\PYZus{}5e\PYZus{}frag\PYZus{}40\PYZus{}step\PYZus{}2\PYZus{}len500\PYZus{}vid6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    PREDICT ON TRAINED MODEL
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Predict using just a single sample loaded from file}
+        \PY{n}{gener\PYZus{}1} \PY{o}{=} \PY{n}{Batch\PYZus{}size\PYZus{}1\PYZus{}Generator}\PY{p}{(}\PY{n}{frag\PYZus{}len}\PY{p}{,} \PY{n}{steps}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} this just tests out one sample. I think it is necessary to reset states on prediction too}
+        \PY{n}{stateful\PYZus{}preds} \PY{o}{=} \PY{n}{validator}\PY{o}{.}\PY{n}{batch\PYZus{}prediction}\PY{p}{(}\PY{n}{gener\PYZus{}1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{stateful\PYZus{}preds}\PY{p}{)}\PY{p}{,} \PY{n}{stateful\PYZus{}preds}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}first is fragment, second is the only one sample}
+        \PY{n}{predicted} \PY{o}{=} \PY{n}{stateful\PYZus{}preds}\PY{p}{[}\PY{l+m+mi}{15}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{true\PYZus{}frag\PYZus{}len}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{)}
+        
+        \PY{n}{vect} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{VideoCapture}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{neurofinder\PYZus{}data/01.00.label.tif}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{vect}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{ret}\PY{p}{,}\PY{n}{lab\PYZus{}frame} \PY{o}{=} \PY{n}{vect}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+        \PY{n}{lab\PYZus{}frame} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{lab\PYZus{}frame}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}truth = lab\PYZus{}frame[0].reshape(256,400)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{lab\PYZus{}frame}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}frame in fragment, goes up to fragment length}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{predicted}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}fig, ax = try\PYZus{}all\PYZus{}threshold(predicted[1], figsize=(10, 8), verbose=False)}
+        \PY{n}{thresh} \PY{o}{=} \PY{n}{threshold\PYZus{}yen}\PY{p}{(}\PY{n}{predicted}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{predicted}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{n}{thresh}\PY{p}{,}  \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{n}{thresh}\PY{p}{,} \PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{mini-batch}{%
+\subsection{Mini-batch}\label{mini-batch}}
+
+\hypertarget{stateful-batch_shape-batch_size-frag_len-x-y-1}{%
+\subsection{STATEFUL batch\_shape = {[}batch\_size, frag\_len, x, y,
+1{]}}\label{stateful-batch_shape-batch_size-frag_len-x-y-1}}
+
+\begin{verbatim}
+8 samples at a time
+update made after no_fragments batches
+y = [8, 1, x, y, 1]
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{class} \PY{n+nc}{Batch\PYZus{}size\PYZus{}n\PYZus{}Generator}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+        
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{,}\PY{n}{frag\PYZus{}len}\PY{p}{,}\PY{n}{steps} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,}\PY{n}{valid} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{frag\PYZus{}len} \PY{o}{=} \PY{n}{frag\PYZus{}len}
+                \PY{c+c1}{\PYZsh{}print(frag\PYZus{}len)}
+                \PY{c+c1}{\PYZsh{} this will track the progress of the batches sequentially through the}
+                \PY{c+c1}{\PYZsh{} data set \PYZhy{} once the data reaches the end of the data set it will reset}
+                \PY{c+c1}{\PYZsh{} back to zero}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}idxs} \PY{o}{=} \PY{p}{[}\PY{p}{]} 
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}count} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data} \PY{o}{=} \PY{k+kc}{None}
+                \PY{c+c1}{\PYZsh{} dimensions expected by the network}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dims} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{steps} \PY{o}{=} \PY{n}{steps}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{n}{batch\PYZus{}size}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{valid} \PY{o}{=} \PY{n}{valid}
+            
+                \PY{c+c1}{\PYZsh{}self.dup\PYZus{}rows()}
+                \PY{c+c1}{\PYZsh{} skip\PYZus{}step is the number of words which will be skipped before the next}
+                \PY{c+c1}{\PYZsh{} batch is skimmed from the data set}
+        
+            \PY{k}{def} \PY{n+nf}{dup\PYZus{}rows}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{indx}\PY{p}{,} \PY{n}{num\PYZus{}dups}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{p}{[}\PY{n}{indx}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{num\PYZus{}dups}\PY{p}{,}\PY{n}{a}\PY{p}{[}\PY{n}{indx}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+            
+            \PY{k}{def} \PY{n+nf}{\PYZus{}resizeNnormalize}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{dimso}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{        data : the image to be resized }
+        \PY{l+s+sd}{        dimso : the dimensions to be resized to (tuple)}
+        \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{n}{data} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dims}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dims}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                \PY{n}{img} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{cvtColor}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{COLOR\PYZus{}BGR2GRAY}\PY{p}{)}
+                \PY{n}{nomalized} \PY{o}{=} \PY{n}{img}\PY{o}{/}\PY{l+m+mi}{255}
+                \PY{k}{return} \PY{n}{nomalized}
+            
+            \PY{k}{def} \PY{n+nf}{\PYZus{}fetchframes}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{indxs}\PY{p}{,} \PY{n}{video}\PY{p}{)}\PY{p}{:}
+                \PY{n}{frames} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{k}{for} \PY{n}{indexer} \PY{o+ow}{in} \PY{n}{indxs}\PY{p}{:}
+                    \PY{n}{video}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{indexer}\PY{p}{)} \PY{c+c1}{\PYZsh{} Where frame\PYZus{}no is the frame you want}
+                    \PY{n}{ret}\PY{p}{,} \PY{n}{frame} \PY{o}{=} \PY{n}{video}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} Read the frame}
+                    \PY{n}{frames}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}resizeNnormalize}\PY{p}{(}\PY{n}{frame}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dims}\PY{p}{)}\PY{p}{)}
+                \PY{k}{return}\PY{p}{(}\PY{n}{frames}\PY{p}{)}
+            
+            \PY{k}{def} \PY{n+nf}{\PYZus{}fetchlabels}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{label}\PY{p}{,} \PY{n}{true\PYZus{}frag\PYZus{}len}\PY{p}{)}\PY{p}{:}
+                \PY{n}{frames} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{label}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+                \PY{n}{ret}\PY{p}{,}\PY{n}{lab\PYZus{}frame} \PY{o}{=} \PY{n}{label}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+                \PY{n}{label\PYZus{}frame} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}resizeNnormalize}\PY{p}{(}\PY{n}{lab\PYZus{}frame}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dims}\PY{p}{)} 
+                \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{n}{label\PYZus{}frame} \PY{k}{for} \PY{n}{indx} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{true\PYZus{}frag\PYZus{}len}\PY{p}{)}\PY{p}{]}
+                \PY{k}{return}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+            
+            
+            \PY{k}{def} \PY{n+nf}{generate}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} this generator returns no\PYZus{}frag fragments for each sample before moving to the next sample}
+                \PY{n}{data\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{00.00}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{01.00}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{01.01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{02.00}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{02.01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{04.00}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{04.01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+                    \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{valid} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}idxs} \PY{o}{=} \PY{p}{[} \PY{n}{data\PYZus{}array}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{)}\PY{p}{]}
+                        
+                        \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}count} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Validating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    \PY{k}{elif} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}count} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}idxs} \PY{o}{=} \PY{p}{[}\PY{n}{data\PYZus{}array}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{)}\PY{p}{]}
+                        \PY{n+nb}{print}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}idxs}\PY{p}{)}
+                    
+                    \PY{c+c1}{\PYZsh{}self.data = [np.load(\PYZsq{}dummies/video\PYZus{}\PYZsq{} + str(ind) + \PYZsq{}.npy\PYZsq{}) for ind in self.current\PYZus{}idxs]}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{n}{cv2}\PY{o}{.}\PY{n}{VideoCapture}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neurofinder\PYZus{}data/}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{ind} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.avi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{for} \PY{n}{ind} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}idxs}\PY{p}{]}
+                    \PY{c+c1}{\PYZsh{}self.data = [cv2.VideoCapture(\PYZsq{}neurofinder\PYZus{}data/00.00.avi\PYZsq{}) for ind in range(3)]}
+                    \PY{n}{data\PYZus{}len} \PY{o}{=} \PY{l+m+mi}{500}
+                    \PY{c+c1}{\PYZsh{} find out number of fragments for data}
+                    \PY{n}{no\PYZus{}frags} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{p}{(}\PY{n}{data\PYZus{}len}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{frag\PYZus{}len} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{steps}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{}no\PYZus{}frags = int(data\PYZus{}len/frag\PYZus{}len)}
+                    
+                    \PY{c+c1}{\PYZsh{}print(\PYZdq{}No frags inside \PYZdq{} + str(no\PYZus{}frags))}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}count} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                    \PY{c+c1}{\PYZsh{}print(\PYZsq{}current sample number: \PYZsq{} + str(self.current\PYZus{}idxs)+\PYZsq{}, Fragment \PYZsq{} + str(self.current\PYZus{}count)+ \PYZsq{} of \PYZsq{} + str(no\PYZus{}frags))}
+                    
+                    \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}count} \PY{o}{==} \PY{n}{no\PYZus{}frags}\PY{p}{:}
+                        \PY{n+nb}{print}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}count}\PY{p}{)}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}count} \PY{o}{=} \PY{l+m+mi}{0}
+                    
+        
+                    \PY{c+c1}{\PYZsh{} data\PYZus{}range is the range of frames to be fetched for each fragment}
+                    \PY{n}{indxs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}count}\PY{o}{*}\PY{n}{steps}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}count}\PY{o}{*}\PY{n}{steps}\PY{o}{+} \PY{n}{frag\PYZus{}len}\PY{p}{,} \PY{n}{steps}\PY{p}{)}
+                    \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}fetchframes}\PY{p}{(}\PY{n}{indxs}\PY{p}{,}\PY{n}{video}\PY{p}{)} \PY{k}{for} \PY{n}{video} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data}\PY{p}{]}
+                        
+         
+            
+                    \PY{n}{labels} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{cv2}\PY{o}{.}\PY{n}{VideoCapture}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neurofinder\PYZus{}data/}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{ind}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.label.tif}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{ind} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}idxs}\PY{p}{]}
+                    \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}fetchlabels}\PY{p}{(}\PY{n}{lebel}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{lebel} \PY{o+ow}{in} \PY{n}{labels}\PY{p}{]}
+                   
+                        
+                    \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{expand\PYZus{}dims}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+                    \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{expand\PYZus{}dims}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+        
+                    \PY{k}{yield} \PY{n}{x}\PY{p}{,}\PY{n}{y}
+                    
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Set params batch size n}
+        \PY{n}{data\PYZus{}len} \PY{o}{=} \PY{l+m+mi}{500}
+        \PY{n}{steps} \PY{o}{=} \PY{l+m+mi}{2}
+        \PY{n}{frag\PYZus{}len} \PY{o}{=} \PY{l+m+mi}{40}
+        \PY{n}{true\PYZus{}frag\PYZus{}len} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{p}{(}\PY{n}{frag\PYZus{}len}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{n}{steps}\PY{p}{)}
+        \PY{n}{no\PYZus{}frags} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{p}{(}\PY{n}{data\PYZus{}len}\PY{o}{\PYZhy{}}\PY{n}{frag\PYZus{}len} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{n}{steps}\PY{p}{)}
+        \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{3}
+        \PY{n}{no\PYZus{}videos} \PY{o}{=} \PY{l+m+mi}{6}
+        \PY{n}{no\PYZus{}batches} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{no\PYZus{}videos}\PY{o}{/}\PY{n}{batch\PYZus{}size}\PY{p}{)}
+        \PY{n}{reps\PYZus{}for\PYZus{}samples} \PY{o}{=} \PY{n}{no\PYZus{}batches}\PY{o}{*}\PY{n}{no\PYZus{}frags}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{reps\PYZus{}for\PYZus{}samples}\PY{p}{)}
+        \PY{n}{epochs} \PY{o}{=} \PY{l+m+mi}{5}
+\end{Verbatim}
+
+
+    Check that generator is producing the right data
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{True fragment length }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{true\PYZus{}frag\PYZus{}len}\PY{p}{)}\PY{p}{)}
+        \PY{n}{gener\PYZus{}obj} \PY{o}{=} \PY{n}{Batch\PYZus{}size\PYZus{}n\PYZus{}Generator}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,}\PY{n}{frag\PYZus{}len}\PY{p}{,}\PY{n}{steps}\PY{p}{)}
+        \PY{n}{gener} \PY{o}{=} \PY{n}{gener\PYZus{}obj}\PY{o}{.}\PY{n}{generate}\PY{p}{(}\PY{p}{)}
+        \PY{n}{X}\PY{p}{,}\PY{n}{y} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{gener}\PY{p}{)}
+        \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{y}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{vect} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{VideoCapture}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{neurofinder\PYZus{}data/01.00.label.tif}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{vect}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{ret}\PY{p}{,}\PY{n}{lab\PYZus{}frame} \PY{o}{=} \PY{n}{vect}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+        \PY{n}{lab\PYZus{}frame} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{lab\PYZus{}frame}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}truth = lab\PYZus{}frame[0].reshape(256,256)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{lab\PYZus{}frame}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Max value: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{lab\PYZus{}frame}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{)}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Max value: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{)}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Max value: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    TRAIN ON MODEL
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{model\PYZus{}stateful\PYZus{}batchn} \PY{o}{=} \PY{n}{load\PYZus{}model}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,}\PY{n}{true\PYZus{}frag\PYZus{}len}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{model\PYZus{}stateful\PYZus{}batchn} \PY{o}{=} \PY{n}{tsu\PYZus{}net}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,}\PY{n}{true\PYZus{}frag\PYZus{}len}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{gener} \PY{o}{=} \PY{n}{Batch\PYZus{}size\PYZus{}n\PYZus{}Generator}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,}\PY{n}{frag\PYZus{}len}\PY{p}{,}\PY{n}{steps}\PY{p}{)}
+        \PY{n}{valid\PYZus{}generator} \PY{o}{=} \PY{n}{Batch\PYZus{}size\PYZus{}n\PYZus{}Generator}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{frag\PYZus{}len}\PY{p}{,} \PY{n}{steps}\PY{p}{,} \PY{n}{valid} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{validator\PYZus{}n} \PY{o}{=} \PY{n}{Validate\PYZus{}and\PYZus{}Metrics}\PY{p}{(}\PY{p}{)}
+        \PY{n}{model\PYZus{}stateful\PYZus{}batchn\PYZus{}trained}\PY{p}{,} \PY{n}{epoch\PYZus{}execution\PYZus{}timemini} \PY{o}{=} \PY{n}{train\PYZus{}model}\PY{p}{(}\PY{n}{model\PYZus{}stateful\PYZus{}batchn}\PY{p}{,} \PY{n}{reps\PYZus{}for\PYZus{}samples}\PY{p}{,} \PY{n}{no\PYZus{}frags}\PY{p}{,} \PY{n}{gener}\PY{p}{,}\PY{n}{valid\PYZus{}generator}\PY{p}{,}\PY{n}{epochs}\PY{p}{,} \PY{n}{true\PYZus{}frag\PYZus{}len}\PY{p}{,}\PY{n}{validator\PYZus{}n} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{minibatch\PYZus{}metrics} \PY{o}{=} \PY{n}{validator\PYZus{}n}\PY{o}{.}\PY{n}{get\PYZus{}metrics}\PY{p}{(}\PY{p}{)}
+        \PY{n}{minibatch\PYZus{}metrics}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{minibatch\PYZus{}execution\PYZus{}time} \PY{o}{=} \PY{n}{epoch\PYZus{}execution\PYZus{}timemini}
+        \PY{n}{minibatch\PYZus{}execution\PYZus{}time}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{save\PYZus{}model}\PY{p}{(}\PY{n}{model\PYZus{}stateful\PYZus{}batchn\PYZus{}trained}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{minibatch\PYZus{}5e\PYZus{}frag\PYZus{}40\PYZus{}step\PYZus{}2\PYZus{}len500\PYZus{}vid6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    PREDICT ON TRAINED MODEL
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{gener\PYZus{}n} \PY{o}{=} \PY{n}{Batch\PYZus{}size\PYZus{}n\PYZus{}Generator}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{frag\PYZus{}len}\PY{p}{,} \PY{n}{steps}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} this just tests out one sample. I think it is necessary to reset states on prediction too}
+        \PY{c+c1}{\PYZsh{} Predict using just a single sample loaded from file}
+        \PY{n}{stateful\PYZus{}preds\PYZus{}n} \PY{o}{=} \PY{n}{validator\PYZus{}n}\PY{o}{.}\PY{n}{batch\PYZus{}prediction}\PY{p}{(}\PY{n}{gener\PYZus{}n}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{stateful\PYZus{}preds\PYZus{}n}\PY{p}{)}\PY{p}{,} \PY{n}{stateful\PYZus{}preds\PYZus{}n}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Second index is the video number, first index the fragment }
+        \PY{n}{predictedn} \PY{o}{=} \PY{n}{stateful\PYZus{}preds\PYZus{}n}\PY{p}{[}\PY{l+m+mi}{229}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{true\PYZus{}frag\PYZus{}len}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{)}
+        
+        \PY{n}{vect} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{VideoCapture}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{neurofinder\PYZus{}data/01.01.label.tif}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{vect}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{ret}\PY{p}{,}\PY{n}{lab\PYZus{}frame} \PY{o}{=} \PY{n}{vect}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+        \PY{n}{lab\PYZus{}frame} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{lab\PYZus{}frame}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}truth = lab\PYZus{}frame[0].reshape(256,256)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{lab\PYZus{}frame}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}predicted result}
+        \PY{c+c1}{\PYZsh{} this index is the frame in the fragment}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{predictedn}\PY{p}{[}\PY{l+m+mi}{19}\PY{p}{]}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{filters} \PY{k}{import} \PY{n}{try\PYZus{}all\PYZus{}threshold}
+        
+        \PY{c+c1}{\PYZsh{}fig, ax = try\PYZus{}all\PYZus{}threshold(predicted[1], figsize=(10, 8), verbose=False)}
+        \PY{n}{thresh} \PY{o}{=} \PY{n}{threshold\PYZus{}yen}\PY{p}{(}\PY{n}{predicted}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{predictedn}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{n}{thresh}\PY{p}{,}  \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{n}{thresh}\PY{p}{,} \PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{evaluation-analysis}{%
+\section{Evaluation Analysis}\label{evaluation-analysis}}
+
+    Average Run time per epoch
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Stochastic: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{stochastic\PYZus{}execution\PYZus{}time}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ +/\PYZhy{} }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{stochastic\PYZus{}execution\PYZus{}time}\PY{p}{)}\PY{p}{)}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mini\PYZhy{}batch: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{minibatch\PYZus{}execution\PYZus{}time}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ +/\PYZhy{} }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{minibatch\PYZus{}execution\PYZus{}time}\PY{p}{)}\PY{p}{)}\PY{p}{)} 
+\end{Verbatim}
+
+
+    Plot of F1 scores and Precision and Recall
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{axes}\PY{p}{(}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Epoch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F1score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+               \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean F1score per epoch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{minibatch\PYZus{}metrics}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f1scores}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mini\PYZhy{}batch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{stocahstic\PYZus{}metrics}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f1scores}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dashdot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stochastic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{axes}\PY{p}{(}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Epoch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{precisions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+               \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean precisions per epoch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{minibatch\PYZus{}metrics}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{precisions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mini\PYZhy{}batch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{stocahstic\PYZus{}metrics}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{precisions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dashdot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stochastic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{axes}\PY{p}{(}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Epoch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{recalls}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+               \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean recalls per epoch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{minibatch\PYZus{}metrics}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{recalls}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mini\PYZhy{}batch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{stocahstic\PYZus{}metrics}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{recalls}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dashdot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stochastic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{minibatch\PYZus{}metrics}\PY{p}{,}\PY{n}{stocahstic\PYZus{}metrics}
+\end{Verbatim}
+
+
+    Mean F1 score, precision and recall on test set
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{save\PYZus{}model}\PY{p}{(}\PY{n}{model}\PY{p}{,}\PY{n}{name}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Creates a HDF5 file \PYZsq{}my\PYZus{}model.h5\PYZsq{}}
+            \PY{n}{model}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{name} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.h5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{transfer-learning}{%
+\subsection{TRANSFER LEARNING}\label{transfer-learning}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{load\PYZus{}model}
+        \PY{n}{model} \PY{o}{=} \PY{n}{load\PYZus{}model}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{minibatch\PYZus{}5e\PYZus{}frag\PYZus{}40\PYZus{}step\PYZus{}2\PYZus{}len500\PYZus{}vid6.h5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{gener\PYZus{}transfer} \PY{o}{=} \PY{n}{Batch\PYZus{}size\PYZus{}n\PYZus{}Generator}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{frag\PYZus{}len}\PY{p}{,} \PY{n}{steps}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{validator} \PY{o}{=} \PY{n}{Validate\PYZus{}and\PYZus{}Metrics}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{no\PYZus{}frags}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{transfer\PYZus{}result} \PY{o}{=} \PY{n}{validator}\PY{o}{.}\PY{n}{batch\PYZus{}prediction}\PY{p}{(}\PY{n}{gener\PYZus{}transfer}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{transfer\PYZus{}result}\PY{p}{)}\PY{p}{,} \PY{n}{transfer\PYZus{}result}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Second index is the video number, first index the fragment }
+        \PY{n}{predictedn} \PY{o}{=} \PY{n}{transfer\PYZus{}result}\PY{p}{[}\PY{l+m+mi}{229}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{true\PYZus{}frag\PYZus{}len}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{)}
+        
+        \PY{n}{vect} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{VideoCapture}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{neurofinder\PYZus{}data/380Manualscale bar.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{vect}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{ret}\PY{p}{,}\PY{n}{lab\PYZus{}frame} \PY{o}{=} \PY{n}{vect}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+        \PY{n}{lab\PYZus{}frame} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{lab\PYZus{}frame}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}truth = lab\PYZus{}frame[0].reshape(256,256)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{lab\PYZus{}frame}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}predicted result}
+        \PY{c+c1}{\PYZsh{} this index is the frame in the fragment}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{off}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{cv2}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{predictedn}\PY{p}{[}\PY{l+m+mi}{19}\PY{p}{]}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{512}\PY{p}{,}\PY{l+m+mi}{512}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{truth} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/home/pelonomi/Desktop/thesis\PYZus{}images/01.01.label.png}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{pred} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/home/pelonomi/Desktop/thesis\PYZus{}images/01.01\PYZus{}unet2ds.png}\PY{l+s+s2}{\PYZdq{}}
+        
+        \PY{k}{def} \PY{n+nf}{loadimg}\PY{p}{(}\PY{n}{path}\PY{p}{)}\PY{p}{:}
+            \PY{n}{vect} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{VideoCapture}\PY{p}{(}\PY{n}{path}\PY{p}{)}
+            \PY{n}{vect}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{ret}\PY{p}{,}\PY{n}{lab\PYZus{}frame} \PY{o}{=} \PY{n}{vect}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+            \PY{n}{lab\PYZus{}frame} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{lab\PYZus{}frame}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,}\PY{l+m+mi}{256}\PY{p}{)}\PY{p}{)}
+            \PY{n}{lab\PYZus{}frame} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{cvtColor}\PY{p}{(}\PY{n}{lab\PYZus{}frame}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{COLOR\PYZus{}BGR2GRAY}\PY{p}{)}
+            \PY{k}{return} \PY{n}{lab\PYZus{}frame}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
